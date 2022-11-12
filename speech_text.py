@@ -1,16 +1,10 @@
-import playsound
+# Convert Speech to Text
+# pip install SpeechRecognition
 import speech_recognition as sr
-from gtts import gTTS
+import pyttsx3
+import requests
 
-
-def speak(text):
-    tts = gTTS(text=text, lang="en")
-    filename = "voice.mp3"
-    tts.save(filename)
-    playsound.playsound(filename)
-
-
-def get_audio():
+def SpeechToText():
     r = sr.Recognizer()
     with sr.Microphone() as source:
         audio = r.listen(source)
@@ -27,7 +21,6 @@ def get_audio():
 
 text = get_audio()
 
-if "hello" in text:
-    speak("hello, how are you?")
-elif "what is your name" in text:
-    speak("My name is Tim")
+except sr.UnknownValueError:
+    print("Sorry Can't understand, Try again")
+    SpeechToText()
